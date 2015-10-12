@@ -29,9 +29,9 @@ public class Prop<T>
     
     private final LagoProps props;
     private final String key;
-    private final T data;
-    private final boolean isNull;
-    private final boolean isError;
+    private T data;
+    private boolean isNull;
+    private boolean isError;
     private final String originalData;
     
     public T get()
@@ -46,7 +46,15 @@ public class Prop<T>
     
     public void set(T value)
     {
+        if(value == null)
+        {
+            throw new IllegalArgumentException("Cannot set prop to null!");
+        }
+        
         props.set(key, value);
+        isError = false;
+        isNull = false;
+        data = value;
     }
     
     public boolean isError()
