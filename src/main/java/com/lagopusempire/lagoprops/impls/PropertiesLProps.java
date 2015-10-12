@@ -74,7 +74,7 @@ public class PropertiesLProps implements LagoProps
             String str = data.getProperty(key);
             if(str.matches("[1-9]\\d*(\\.\\d+)?$"))
             {
-                double d = Integer.parseInt(str);
+                double d = Double.parseDouble(str);
                 return new Prop<>(this, key, d, str);
             }
             else
