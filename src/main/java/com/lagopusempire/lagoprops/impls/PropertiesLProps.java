@@ -27,7 +27,25 @@ public class PropertiesLProps implements LagoProps
             data = new Properties();
         }
         
-        data.load(dataStream);
+        if(dataStream != null)
+        {
+            data.load(dataStream);
+        }
+    }
+    
+    public PropertiesLProps(FileInputStream dataStream, FileOutputStream saveStream) throws IOException
+    {
+        this(dataStream, null, saveStream);
+    }
+    
+    public PropertiesLProps(FileInputStream dataStream, FileInputStream defaultDataStream) throws IOException
+    {
+        this(dataStream, defaultDataStream, null);
+    }
+    
+    public PropertiesLProps(FileInputStream dataStream) throws IOException
+    {
+        this(dataStream, null, null);
     }
 
     @Override
@@ -97,7 +115,13 @@ public class PropertiesLProps implements LagoProps
     @Override
     public void save() throws IOException
     {
-        data.store(saveStream, null);
+        if(saveStream == null)
+        {
+            throw new IllegalStateException("PropertiesLProps constructed without a save stream!");
+        }
+        else
+        {
+            data.store(saveStream, null);
+        }
     }
-    
 }
