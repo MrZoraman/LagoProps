@@ -2,17 +2,17 @@ package com.lagopusempire.lagoprops.impls;
 
 import com.lagopusempire.lagoprops.LagoProps;
 import com.lagopusempire.lagoprops.Prop;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 public class PropertiesLProps implements LagoProps
 {
     private final Properties data;
-    private final FileOutputStream saveStream;
+    private final OutputStream saveStream;
     
-    public PropertiesLProps(FileInputStream dataStream, FileInputStream defaultDataStream, FileOutputStream saveStream) throws IOException
+    public PropertiesLProps(InputStream dataStream, InputStream defaultDataStream, OutputStream saveStream) throws IOException
     {
         this.saveStream = saveStream;
         
@@ -33,17 +33,17 @@ public class PropertiesLProps implements LagoProps
         }
     }
     
-    public PropertiesLProps(FileInputStream dataStream, FileOutputStream saveStream) throws IOException
+    public PropertiesLProps(InputStream dataStream, OutputStream saveStream) throws IOException
     {
         this(dataStream, null, saveStream);
     }
     
-    public PropertiesLProps(FileInputStream dataStream, FileInputStream defaultDataStream) throws IOException
+    public PropertiesLProps(InputStream dataStream, InputStream defaultDataStream) throws IOException
     {
         this(dataStream, defaultDataStream, null);
     }
     
-    public PropertiesLProps(FileInputStream dataStream) throws IOException
+    public PropertiesLProps(InputStream dataStream) throws IOException
     {
         this(dataStream, null, null);
     }
