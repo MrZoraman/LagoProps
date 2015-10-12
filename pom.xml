@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
-    <name>LagoPrpos</name>
+    <name>LagoProps</name>
     <description>Library for saving and retrieving properties/configuration</description>
     <inceptionYear>2015</inceptionYear>
     <organization>
