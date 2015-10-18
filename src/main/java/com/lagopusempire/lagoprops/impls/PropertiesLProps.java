@@ -2,6 +2,10 @@ package com.lagopusempire.lagoprops.impls;
 
 import com.lagopusempire.lagoprops.LagoProps;
 import com.lagopusempire.lagoprops.Prop;
+import com.lagopusempire.lagoprops.resources.ResourceExporter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,42 +14,38 @@ import java.util.Properties;
 public class PropertiesLProps implements LagoProps
 {
     private final Properties data;
-    private final OutputStream saveStream;
+    private final String fileName;
     
-    public PropertiesLProps(InputStream dataStream, InputStream defaultDataStream, OutputStream saveStream) throws IOException
+    public PropertiesLProps(String fileName, Class c) throws IOException
     {
-        this.saveStream = saveStream;
+        ResourceExporter exporter = new ResourceExporter(c);
         
-        if(defaultDataStream != null)
+        File file = new File(fileName);
+        if(!file.exists())
         {
-            Properties defaultProps = new Properties();
-            defaultProps.load(defaultDataStream);
-            data = new Properties(defaultProps);
-        }
-        else
-        {
-            data = new Properties();
+            exporter.exportResource(fileName);
         }
         
-        if(dataStream != null)
+        Properties defaultProps = new Properties();
+        InputStream defaultPropsStream = exporter.getResourceStream(fileName);
+        defaultProps.load(defaultPropsStream);
+        
+        data = new Properties(defaultProps);
+        InputStream dataStream = new FileInputStream(file);
+        data.load(dataStream);
+        
+        this.fileName = fileName;
+    }
+    
+    public PropertiesLProps(String fileName) throws IOException
+    {
+        File file = new File(fileName);
+        if(!file.exists())
         {
-            data.load(dataStream);
+            file.createNewFile();
         }
-    }
-    
-    public PropertiesLProps(InputStream dataStream, OutputStream saveStream) throws IOException
-    {
-        this(dataStream, null, saveStream);
-    }
-    
-    public PropertiesLProps(InputStream dataStream, InputStream defaultDataStream) throws IOException
-    {
-        this(dataStream, defaultDataStream, null);
-    }
-    
-    public PropertiesLProps(InputStream dataStream) throws IOException
-    {
-        this(dataStream, null, null);
+        data = new Properties();
+        this.fileName = fileName;
     }
 
     @Override
@@ -115,13 +115,7 @@ public class PropertiesLProps implements LagoProps
     @Override
     public void save() throws IOException
     {
-        if(saveStream == null)
-        {
-            throw new IllegalStateException("PropertiesLProps constructed without a save stream!");
-        }
-        else
-        {
-            data.store(saveStream, null);
-        }
+        OutputStream saveStream = new FileOutputStream(new File(fileName));
+        data.store(saveStream, null);
     }
 }
