@@ -37,16 +37,16 @@ public class PropertiesLProps implements LagoProps
         this.fileName = fileName;
     }
     
-    public PropertiesLProps(String fileName) throws IOException
-    {
-        File file = new File(fileName);
-        if(!file.exists())
-        {
-            file.createNewFile();
-        }
-        data = new Properties();
-        this.fileName = fileName;
-    }
+//    public PropertiesLProps(String fileName) throws IOException
+//    {
+//        data = new Properties();
+//        File file = new File(fileName);
+//        if(!file.exists())
+//        {
+//            file.createNewFile();
+//        }
+//        this.fileName = fileName;
+//    }
 
     @Override
     public Prop<String> getString(String key)
