@@ -37,8 +37,8 @@ public interface LagoProps
     
     /**
      * Saves the data to the disk.
-     * Data is set via the {@link Prop#set(java.lang.Object} method in the {@link Prop} class.
-     * @throws IOException 
+     * Data is set via the {@link Prop#set(java.lang.Object)} method in the {@link Prop} class.
+     * @throws IOException If the LagoProps fails to write the file to disk.
      */
     public void save() throws IOException;
 }
