@@ -11,9 +11,8 @@ read data with a single line of code. If you want to be super careful,
 you can check several things before using the data read from the file.
 
 # Javadoc
-I have javadocs, they'll be uploaded and a link given to them when
-my webmaster wakes up. I suppose I can do it myself. It's on my todo
-list.
+I have [javadocs](http://jd.lagopusempire.com/LagoProps/1.0/)!
+If it's not documented, then you shouldn't need to use it.
 
 # Code Example
 Assuming that this is in a class called Main, and there is a
